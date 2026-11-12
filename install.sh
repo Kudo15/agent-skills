@@ -26,7 +26,7 @@ install_one() {
   fi
   case "$(uname -s)" in
     MINGW*|MSYS*|CYGWIN*)
-      cmd //c "mklink /J \"$(cygpath -w "$dest")\" \"$(cygpath -w "$src")\"" >/dev/null
+      MSYS_NO_PATHCONV=1 cmd /c mklink /J "$(cygpath -w "$dest")" "$(cygpath -w "$src")" >/dev/null
       ;;
     *)
       ln -s "$src" "$dest"
